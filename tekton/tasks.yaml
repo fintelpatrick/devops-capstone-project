@@ -50,6 +50,7 @@ spec:
 #          rm -rf "${WORKSPACE_SOURCE_PATH}"/..?*
 #        fi
 ---
+---
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -57,10 +58,10 @@ metadata:
 spec:
   description: This task will run nosetests on the provided input.
   workspaces:
-    - name: source 
+    - name: source
   params:
     - name: args
-      description: Arguments to pass into nose
+      description: Arguments to pass to nose
       type: string
       default: "-v"
     - name: database_uri
@@ -78,10 +79,9 @@ spec:
         #!/bin/bash
         set -e
 
-        echo "***** Intalling dependencies *****"
+        echo "***** Installing dependencies *****"
         python -m pip install --upgrade pip wheel
         pip install -qr requirements.txt
 
-        Echo "***** Running nosetests with: $(params.args)"
+        echo "***** Running nosetests with: $(params.args)"
         nosetests $(params.args)
-
